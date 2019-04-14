@@ -1,0 +1,258 @@
+<h1> python基础语法</h1>
+
+<!-- TOC -->
+
+- [一：输出 print](#一输出-print)
+    - [1.字符串拼接输出](#1字符串拼接输出)
+    - [2.转义输出](#2转义输出)
+    - [3.获取用户输入](#3获取用户输入)
+    - [4.编码方式转换](#4编码方式转换)
+    - [5.格式化字符串](#5格式化字符串)
+    - [6.对字符串的操作 截取字符串 获取字符 长度 大小写](#6对字符串的操作-截取字符串-获取字符-长度-大小写)
+- [二: list、tuple](#二-listtuple)
+    - [1.list初始化](#1list初始化)
+    - [2.获取list的元素和长度](#2获取list的元素和长度)
+    - [3.list添加和删除元素](#3list添加和删除元素)
+    - [4.list修改元素](#4list修改元素)
+    - [5.迭代list](#5迭代list)
+    - [6.元素是否存在list中](#6元素是否存在list中)
+    - [7.tuple的初始化](#7tuple的初始化)
+    - [8.访问tuple元素](#8访问tuple元素)
+    - [9.删除元组](#9删除元组)
+    - [10.迭代range](#10迭代range)
+    - [11.元组内置函数 cmp max min tuple](#11元组内置函数-cmp-max-min-tuple)
+- [三：Dict、Set](#三dictset)
+    - [1.字典的创建](#1字典的创建)
+    - [2.字典的访问](#2字典的访问)
+    - [3.遍历dict](#3遍历dict)
+    - [4.Set的创建](#4set的创建)
+    - [5.set的访问](#5set的访问)
+    - [6.set添加和删除元素](#6set添加和删除元素)
+
+<!-- /TOC -->
+#### 一：输出 print
+
+##### 1.字符串拼接输出
+```python
+# -*- coding:utf-8 -*-               #python2输出中文时需要添加
+print("the ","man ","is superman")   #逗号隔开，拼接字符串输出
+
+print("100+200=",100+200)            #逗号隔开,拼接字符串和运算结果
+
+#python中字符串可以用单引号，双引号，三引号可表示多行sang
+#引号之间可以嵌套，显示里面的引号
+print("this is 'zifuchuan'")         #this is 'zifuchuan'
+```
+
+##### 2.转义输出
+```python
+print("this is \" superman \" ")     #用 \ 显示转义字符
+
+print(r"ad\ncd");                    #前面加个r，所有的就都转义了
+```
+
+##### 3.获取用户输入
+```python
+name=input('please enter your name: ')    #提示用户输入,并获取用户输入
+print("name:",name)
+```
+
+##### 4.编码方式转换
+bytes <-> str
+```python
+print('ABC'.encode("ASCII"));    #用ASCII编码方式，将ABC字符串转换为bytes字节流
+print('中文'.encode('utf-8'));   #用utf-8编码方式，将'中文'字符串转换为bytes字节流
+bytes='中文'.encode('utf-8')     #获取从磁盘或者网络读取的bytes字节流
+
+print(bytes.decode('utf-8'));    #输出为中文,将bytes字节流转换为str字符串
+```
+
+##### 5.格式化字符串
+%s,%d
+```python
+print("hello,%s"%"world")        # %s会把任何数据类型转换为字符串
+
+print('hi,%s,do you have %d money?'%('tom',100))   
+
+print("hi,[0],your score is [1]".format("chu",100))   #使用占位符 [0] [1].format()
+```
+
+##### 6.对字符串的操作 截取字符串 获取字符 长度 大小写 
+```python
+print(str[0:5])        #输出0-4索引的字符，不包括5
+print(str[2:])         #输出索引为2之后的所有字符组成的字符串
+
+print(str[0])          #输出第一个字符
+
+print(str.split(","))  #输出按分隔符分割的字符串组成的列表
+
+print(str.strip())     #消除字符串两边的空白,包括 \t \r \n
+
+print(len(str))        #打印字符串的长度
+
+print(str.upper())     #转换为大写  str.lower() 小写
+
+print(str.capitalize())   #首字母大写
+```
+
+#### 二: list、tuple
+
+##### 1.list初始化
+```python
+#list 有序 可添加删除元素 可包含任意类型
+list=[1,"2",True,2.3]
+```
+
+##### 2.获取list的元素和长度
+```python
+print(list[0])           #获取list第一个元素
+print(list[-1])          #获取list最后一个元素
+
+print(len(list))         #获取list中的元素个数
+```
+
+##### 3.list添加和删除元素
+```python
+list.append(1)         #添加元素到末尾
+list.insert(0,"paul")  #在索引0处添加元素
+
+list.pop()             #在末尾删除元素
+list.pop(2)            #删除索引为2的元素
+```
+
+##### 4.list修改元素
+```python
+list[0]=1
+```
+##### 5.迭代list
+```python
+for x in list:
+    print(x)
+
+for index,name in enumerate(l):  #通过enumerate(l)获取l中的元素的索引,但enumerate()只能获取有序集合的索引
+    print("{0}:{1}".format(index,name))
+```
+##### 6.元素是否存在list中
+```python
+if x in list:
+    print("x is in list")
+```
+
+##### 7.tuple的初始化
+```python
+# 元组 有序 创建后不可修改
+t = ()
+t = ('Adam', 'Lisa', 'Bart')       #list用的中括号，tuple用的小括号
+t = ('a', 'b', ['A', 'B'])         t(2)[0]=1   #可以这样修改
+t = (1,)                           #只包含一个元素时，添加逗号
+
+#tuple没有 append()方法，也没有insert()和pop()方法  不可添加 删除 修改
+```
+##### 8.访问tuple元素
+```python
+a=t(1)
+b=t[-2]
+c=t[1:]          #截取元素
+```
+##### 9.删除元组
+```python
+del tuple1
+```
+##### 10.迭代range
+```python
+for x in range(2,5)   #2,3,4
+    print(x)
+```
+
+#####11.元组内置函数 cmp max min tuple
+```python
+cmp(tuple1,tupl2)   #比较两个元组
+max(tuple1)
+min(tuple2)
+tuple(seq)          #将list转换为tuple
+```
+
+#### 三：Dict、Set
+##### 1.字典的创建
+```python
+#字典 key-value 
+d = {
+    'Adam': 95,
+    'Lisa': 85,
+    'Bart': 59
+}
+
+#dict 查找速度快,无论dict有10个元素还是10万个元素，查找速度都一样,而list的查找速度随着元素增加而逐渐下降。
+#dict占用内存大，还会浪费很多内容,list正好相反，占用内存小，但是查找速度慢。
+#一个dict中，key不能重复。
+#dict存储的key-value序对是没有顺序的,所以打印的顺序不一定是我们创建时的顺序
+#dict作为 key 的元素必须不可变，list是可变的，不可以当作key
+```
+##### 2.字典的访问
+```python
+d[key]            #通过key访问value
+
+if 'Paul' in d:
+    print d['Paul']
+
+d.get('Bart')     #不存在时会返回None
+
+d["Bart"]="Paul"  #更新dict的元素
+```
+
+##### 3.遍历dict
+```python
+#用for循环遍历Dict
+#遍历key
+for key in d:
+	print key+':',d[key]
+
+#遍历value
+for values in d.values():
+    print(value)    
+
+#同时遍历key value
+for key,value in d.items():
+    print(key,"-",value)
+```
+
+##### 4.Set的创建
+```python
+set的元素没有重复  无序 相当于dict的key集合  自动去重复
+s=set(['A','B','C'])   #创建set的方式就是传入一个list就行了
+ss=set([1,2,3,4])
+```
+##### 5.set的访问
+```python
+无法通过索引来访问,只能 用in 操作符判断是否一个元素是否在set中
+for x in s:
+    print(x)
+
+if x in s:
+    print(x)
+```
+##### 6.set添加和删除元素
+```python
+s = set(['Adam', 'Lisa', 'Paul'])
+L = ['Adam', 'Lisa', 'Bart', 'Paul']
+for x in L:
+    if x in s:
+        s.remove(x)
+    else:
+        s.add(x)
+print(s)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
