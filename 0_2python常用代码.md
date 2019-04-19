@@ -1,4 +1,4 @@
-<h2>python常用代码
+<h2>python常用代--文件操作
 
 #### 一:读取文件并按行切分
 ```python
@@ -53,4 +53,42 @@ if __name__ == '__main__':
     getAttr()                      #调用主函数
 ```
 
-二:
+二:读取文件，按字段排序后，写入文件
+```python
+# -*- coding:utf-8 -*-
+import sys
+import io
+import sys
+from itertools import islice
+
+#reload(sys)
+#sys.setdefaultencoding( "utf-8" )
+
+file="E://python//untitled2//python学习//python基本语法//123.txt"
+#file=sys.argv[1]
+#outfile=sys.argv[2]
+outfile="E://python//untitled2//python学习//python基本语法//234.txt"
+
+#inpath= open(file,'r', encoding='UTF-8')
+inpath = io.open(file, "r", encoding='utf-8')
+before={}
+for line in islice(inpath, 0, None):     #一行一行读取输入文件内容
+    info = line.split("|",-1)             #python中 | 就是竖线分割 不用加双斜杠
+    gongsi=info[0]
+    number=int(info[1])       #将字符串转换成int
+    before[gongsi]=number
+
+after = dict(sorted(before.items(), key=lambda e: e[1],reverse=True))
+#遍历输出字典的
+cnt=0
+out = open(outfile, "w+")
+for key, value in after.items():
+    cnt += 1
+    if cnt >= 100:
+        break
+    #print("{}:{}".format(key, value))
+    str1=key+":"+str(value)+"\n"
+    #print(str1)
+    out.write(str1)
+out.close()
+```
